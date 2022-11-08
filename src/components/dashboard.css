@@ -1,0 +1,90 @@
+.container {
+  margin: auto;
+  width: 90%;
+
+}
+.contentList{
+  padding: 10px;;
+}
+.cardTitle {
+  width: 100%;
+  height: 20%;
+  font-size: 25px;
+  background-color: #44c7f7;
+  color: white;
+  display: block;
+  padding: 0px;
+  font-family: emoji;
+}
+
+
+.column {
+  float: left;
+  width: 95%;
+  padding: 0px;
+  background-color: white;
+  grid-auto-rows: 200px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.column:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.parent {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 16px;
+  /* width:100%;
+  height: 100%; */
+}
+
+.btnContainer {
+  padding: 4%;
+}
+
+.btnAdd {
+  background-color: rgb(15, 186, 233);
+  float: right;
+  border: none;
+  color: white;
+  padding: 9px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 25px;
+  font-family: emoji;
+}
+
+
+.card-footer {
+  margin-top: 83%;
+  background-color: #cce8f3;
+  color: white;
+  justify-content: space-between;
+  padding: 4px;
+  margin-top: auto;
+  box-sizing: border-box;
+  text-align: right
+}
+.deleteIcon{
+  color:red
+}
+.editIcon{
+  color:rgb(7, 152, 192)
+}
+.noData{
+  text-align: center;
+  color:red
+}
