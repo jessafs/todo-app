@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderes user input 1`] = `
+<div
+  className="container"
+>
+  <h1
+    data-testid="header"
+  >
+    TODO LIST
+  </h1>
+  <div
+    className="btnContainer"
+  >
+    <button
+      className="btnAdd"
+      onClick={[Function]}
+    >
+        
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+        />
+      </svg>
+       Add
+    </button>
+  </div>
+  <div
+    className="modal display-none"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header"
+      >
+        <button
+          className="close"
+          onClick={[Function]}
+        >
+          ×
+        </button>
+        <h4>
+          Edit Todo
+        </h4>
+      </div>
+      <div
+        className="modal-body"
+      >
+        <label>
+          Title
+        </label>
+        <input
+          className="topicTitle"
+          name="title"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <label>
+          Content
+        </label>
+        <textarea
+          className="topicContent"
+          name="content"
+          onChange={[Function]}
+          value=""
+        />
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <div />
+        <button
+          className="cancelbtn"
+          onClick={[Function]}
+        >
+          Cancel
+        </button>
+        <button
+          className="savebtn"
+          onClick={[Function]}
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="contentList"
+  >
+    <h1
+      class="noData"
+    >
+      No Available Data!!!
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`renders todo input 1`] = `
+<div
+  className="container"
+>
+  <h1
+    data-testid="header"
+  >
+    TODO LIST
+  </h1>
+  <div
+    className="btnContainer"
+  >
+    <button
+      className="btnAdd"
+      onClick={[Function]}
+    >
+        
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+        />
+      </svg>
+       Add
+    </button>
+  </div>
+  <div
+    className="modal display-none"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header"
+      >
+        <button
+          className="close"
+          onClick={[Function]}
+        >
+          ×
+        </button>
+        <h4>
+          Edit Todo
+        </h4>
+      </div>
+      <div
+        className="modal-body"
+      >
+        <label>
+          Title
+        </label>
+        <input
+          className="topicTitle"
+          name="title"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <label>
+          Content
+        </label>
+        <textarea
+          className="topicContent"
+          name="content"
+          onChange={[Function]}
+          value=""
+        />
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <div />
+        <button
+          className="cancelbtn"
+          onClick={[Function]}
+        >
+          Cancel
+        </button>
+        <button
+          className="savebtn"
+          onClick={[Function]}
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="contentList"
+  >
+    <h1
+      class="noData"
+    >
+      No Available Data!!!
+    </h1>
+  </div>
+</div>
+`;

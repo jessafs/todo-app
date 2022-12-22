@@ -1,0 +1,72 @@
+.accordion-container {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    /* display: grid;
+    grid-template-columns: 40px 20px 20px 20px; */
+}
+
+.accordion {
+    width: 100%;
+    max-width: 540px;
+    margin: 1px auto;
+    color: #fff;
+    border: 1px solid #888;
+}
+
+
+.accordion-heading {
+    background: rgb(15, 186, 233)
+        /* padding: 14px 0; */
+}
+
+.accordion-heading .accordion-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accordion-heading p {
+    letter-spacing: 1.2px;
+    font-weight: 600;
+}
+
+.accordion-heading span {
+    cursor: pointer;
+}
+
+.accordion-content {
+    /* height: 0;
+    opacity: 0;
+    overflow: hidden; */
+    background: #cce8f3;
+    display: flex;
+    transition: all 600ms ease-in-out;
+    width: calc(100% - 40px);
+    padding: 30px 20px;
+    font-size: 11pt;
+    color: rgba(0, 0, 0, .54);
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.accordion-content p {
+    font-size: 15px;
+    line-height: 1.6;
+
+}
+
+.action {
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.deleteIcon {
+    color: #c90a0a;
+}
+
+.editIcon .chevron {
+    color:  #edf2f3;
+}
