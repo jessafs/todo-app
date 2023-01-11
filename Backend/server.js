@@ -1,6 +1,6 @@
 const express = require('express')
 const todoRoutes = require("./routes/todoRoutes")
-
+const userRoutes = require('./routes/userRoutes')
 const app = express()
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 4000
@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 db.connect()
 app.use("/api/todo",todoRoutes)
+app.use("/api/user",userRoutes)
 app.get("/", (req, res) => {
     res.send("Express + Javascript Server");
   });

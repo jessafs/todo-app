@@ -1,139 +1,137 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./modal"
+import Modal from "./modal";
 import Accordion from "./Accordion";
-import { v4 as uuid } from 'uuid';
-import { FaTrashAlt, FaPenAlt, FaPlus } from "react-icons/fa";
+import api from "../helper/api";
+import { FaPlus } from "react-icons/fa";
 import "./dashboard.css";
 function Dashboard() {
   const initialState = {
     todo: {
-      id: '',
-      title: '',
-      content: ''
-    }
-  }
+      title: "",
+      content: "",
+    },
+  };
   const [modalShow, setModalShow] = useState(false);
   const [btnChange, setBtnChange] = useState(false);
   const [data, setData] = useState(initialState);
   const [todoList, setTodoList] = useState([]);
+  const [defaultList, setDefaultList] = useState([]);
   const handleShow = () => {
-    setModalShow(true)
-    setBtnChange(true)
-  }
-  const handleClose = () => setModalShow(false)
-  const isEmpty = Object.values(data.todo).some(x => x === null || x === '');
-
-
+    setModalShow(true);
+    setBtnChange(true);
+  };
+  const handleClose = () => setModalShow(false);
+  const isEmpty = Object.values(data.todo).some((x) => x === null || x === "");
   const handleInputTodo = (e) => {
-    const { name, value } = e.target
-    setData({ todo: { ...data.todo, [name]: value } })//id: uuid() 
-  }
-  const handleGetTodoList = () => {
-    if (isEmpty && todoList.length === 0) {
-      setTodoList([])
+    const { name, value } = e.target;
+    setData({ todo: { ...data.todo, [name]: value } });
+  };
+  const handleGetTodoList = async () => {
+    let result = await api.getAllTodo();
+    if (isEmpty && todoList.length === 0 && result.data.msg === "No Content") {
+      setTodoList([]);
     } else {
-      setTodoList([...todoList, data.todo])
+      setTodoList(result.data ?? []);
+      setDefaultList(result.data ?? []);
     }
-  }
+  };
 
-  const handleAddTodo = () => {
-    const { title, content } = data.todo ?? {}
-    const id = uuid()
+  const handleAddTodo = async () => {
+    const { title, content } = data.todo ?? {};
     if (!title || !content) {
-      alert("All fields are required")
+      alert("All fields are required");
     } else {
-      const newData = {
-        id,
-        title,
-        content
-      }
-      setTodoList([...todoList, newData])
-      handleClose()
+      let res = await api.addTodo(data.todo);
+      setTodoList([...todoList, res.data]);
+      handleClose();
       setData({
         ...data,
         todo: {
-          id: "",
           title: "",
-          content: ""
-        }
-      })
+          content: "",
+        },
+      });
     }
-  }
-
+  };
   const handleCancel = () => {
-    handleClose()
+    handleClose();
     setData({
       ...data,
       todo: {
         id: "",
         title: "",
-        content: ""
-      }
-    })
-  }
-  const handleRemoveList = (id) => {
-    if (!id) {
-      alert("no id")
-    } else {
-      let txt = ''
-      if (window.confirm("Are you sure you want to delete this todo?")) {
-        txt = "Successfully deleted!";
-        const newData = todoList.filter((card) => card.id !== id)
-        setTodoList(newData)
+        content: "",
+      },
+    });
+  };
+  const handleRemoveList = async (id) => {
+    console.log(
+      "%c ❤️: handleRemoveList -> id ",
+      "font-size:16px;background-color:#819576;color:white;",
+      id
+    );
+    try {
+      if (!id) {
+        alert("no id");
       } else {
-        txt = "You pressed Cancel!";
-      }
-
-    }
-
-  }
-  const handleOpenUpdateTodo = (id) => {
-    if (!id) {
-      alert("Not found")
-    } else {
-      const dataToUpdate = todoList.filter((data) => {
-        if (data.id === id) {
-          return data
-        }
-      })
-      setBtnChange(false)
-      setData({ todo: { ...dataToUpdate[0] } })
-      setModalShow(true)
-    }
-  }
-  const handleUpdatetodo = () => {
-    const { title, content, id } = data.todo ?? {}
-    if (!title || !content) {
-      alert("All fields are required")
-    } else {
-      const newData = todoList.map((item) => {
-        if (item.id === id) {
-          return data.todo
+        const res = await api.deleteTodo(id);
+        let txt = "";
+        if (window.confirm("Are you sure you want to delete this todo?")) {
+          txt = "Successfully deleted!";
+          const newData = todoList.filter((card) => card._id !== id);
+          setTodoList(newData);
         } else {
-          return item
+          txt = "You pressed Cancel!";
         }
-      })
-      setTodoList(newData)
-      handleClose()
+        return res;
+      }
+    } catch (error) {
+      alert("Internal Server Error");
+    }
+  };
+  const handleOpenUpdateTodo = async (id) => {
+    if (!id) {
+      alert("Not found");
+    } else {
+      const res = await api.getById(id);
+      const { data } = res.data;
+      setBtnChange(false);
+      setData({ todo: { ...data } });
+      setModalShow(true);
+    }
+  };
+  const handleUpdatetodo = async () => {
+    const { title, content } = data.todo ?? {};
+    if (title || content) {
+      const res = await api.updateTodo(data.todo);
+     
+
+      handleGetTodoList();
+      // setTodoList([...todoList, res.data])
+      handleClose();
       setData({
         ...data,
         todo: {
-          id: "",
           title: "",
-          content: ""
-        }
-      })
+          content: "",
+        },
+      });
+    } else {
+      alert("No content to be update!");
     }
-  }
+  };
 
   useEffect(() => {
-    handleGetTodoList()
+    handleGetTodoList();
   }, []);
   return (
     <div className="container">
       <h1 data-testid="header">TODO LIST</h1>
       <div className="btnContainer">
-        <button className="btnAdd" onClick={handleShow}>  <FaPlus /> Add</button>
+        <button className="btnAdd" onClick={handleShow}>
+          {" "}
+          <FaPlus /> Add
+        </button>
       </div>
       <Modal
         show={modalShow}
@@ -173,11 +171,13 @@ function Dashboard() {
       </div> */}
       {/* accordion */}
       <div className="contentList">
-        {todoList.length === 0 ? <h1 class="noData">No Available Data!!!</h1> :
+        {todoList.length === 0 ? (
+          <h1 class="noData">No Available Data!!!</h1>
+        ) : (
           <div>
-            {todoList.map(({ title, content, id }) => (
+            {todoList.map(({ title, content, _id }) => (
               <Accordion
-                id={id}
+                id={_id}
                 title={title}
                 content={content}
                 handleRemoveList={handleRemoveList}
@@ -185,10 +185,9 @@ function Dashboard() {
               />
             ))}
           </div>
-        }
+        )}
       </div>
-
-    </div >
+    </div>
   );
 }
 
