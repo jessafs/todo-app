@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "./modal";
 import Accordion from "./Accordion";
 import api from "../helper/api";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaPowerOff } from "react-icons/fa";
 import "./dashboard.css";
 function Dashboard() {
   const initialState = {
@@ -20,6 +21,7 @@ function Dashboard() {
     setModalShow(true);
     setBtnChange(true);
   };
+  let navigate = useNavigate();
   const handleClose = () => setModalShow(false);
   const isEmpty = Object.values(data.todo).some((x) => x === null || x === "");
   const handleInputTodo = (e) => {
@@ -65,11 +67,6 @@ function Dashboard() {
     });
   };
   const handleRemoveList = async (id) => {
-    console.log(
-      "%c ❤️: handleRemoveList -> id ",
-      "font-size:16px;background-color:#819576;color:white;",
-      id
-    );
     try {
       if (!id) {
         alert("no id");
@@ -104,7 +101,7 @@ function Dashboard() {
     const { title, content } = data.todo ?? {};
     if (title || content) {
       const res = await api.updateTodo(data.todo);
-     
+
 
       handleGetTodoList();
       // setTodoList([...todoList, res.data])
@@ -121,11 +118,19 @@ function Dashboard() {
     }
   };
 
+  const handleLogout =()=>{
+    localStorage.removeItem("token")
+    navigate('/')
+  }
+
   useEffect(() => {
     handleGetTodoList();
   }, []);
   return (
     <div className="container">
+      <button className="btnLogout" onClick={handleLogout}>
+        <FaPowerOff />Logout
+      </button>
       <h1 data-testid="header">TODO LIST</h1>
       <div className="btnContainer">
         <button className="btnAdd" onClick={handleShow}>
